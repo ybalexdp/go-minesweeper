@@ -175,7 +175,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		if msg.Type != tea.MouseLeft {
 			return m, nil
 		}
-		return m.choose(col, row)
+		return m.choose(col, row), nil
 
 	case tea.KeyMsg:
 
@@ -276,10 +276,10 @@ func (m model) cellMiddle(data int, opened, flagged bool) string {
 	return d + vertical
 }
 
-func (m model) choose(col, row int) (tea.Model, tea.Cmd) {
+func (m model) choose(col, row int) tea.Model {
 
 	if m.points[row][col].flagged {
-		return m, nil
+		return m
 	}
 
 	if m.points[row][col].data == -1 {
@@ -293,7 +293,7 @@ func (m model) choose(col, row int) (tea.Model, tea.Cmd) {
 		m.multiOpen(row, col)
 	}
 
-	return m, nil
+	return m
 }
 
 func (m model) viewHeader() string {
