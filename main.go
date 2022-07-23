@@ -20,7 +20,6 @@ func main() {
 	p := tea.NewProgram(
 		m,
 		tea.WithAltScreen(),
-		tea.WithMouseCellMotion(),
 	)
 
 	err = p.Start()
