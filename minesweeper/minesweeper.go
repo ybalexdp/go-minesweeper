@@ -229,15 +229,11 @@ func (m *model) multiOpen(row, col int) {
 			}
 			m.points[x][y].opened = true
 			m.remain--
+
 			if m.points[x][y].data == 0 {
 				m.multiOpen(x, y)
 			}
 		}
-	}
-
-	if !m.points[row][col].opened {
-		m.points[row][col].opened = true
-		m.remain--
 	}
 }
 
@@ -278,7 +274,7 @@ func (m model) cellMiddle(data int, opened, flagged bool) string {
 
 func (m model) choose(col, row int) tea.Model {
 
-	if m.points[row][col].flagged {
+	if m.points[row][col].flagged || m.points[row][col].opened {
 		return m
 	}
 
